@@ -1,0 +1,99 @@
+{% include "header.html" %}
+
+{% block content %}
+
+<br>
+<div class="container px-4 px-lg-5">
+
+    <h1>Long dataset</h1> 
+    <p>This is the extended dataset, with full information about identifiers which have had potential SIMs found in them based on the parameters set in Process Files. If you wish to change those parameters, please revisit the page and update your numbers, and a new dataset will be generated based on those parameters.</p>
+
+    <p>If your screen has a low resolution, you may have to scroll rightwards to view extra columns. For reference, the final column is "P".</p>
+
+    <p>To download this data as a csv, either click the button below or find it in "/data/final_results/long_dataset.csv" in the project's working directory.</p>
+    
+
+    <form action="/download_long_csv" method="post">
+        <button type="submit" class="btn btn-lg btn-primary">Download CSV</button>
+    </form>
+
+    <br>
+</div>
+
+
+<br>
+
+
+{% if csv_found %}
+    <div class="text-center">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Identifier</th>
+                    <th>Disordered region</th>
+                    <th>Disorder score</th>
+                    <th>Nuclear Score</th>
+                    <th>SIM Position Site</th>
+                    <th>SIM Sequence</th>
+                    <th>SIM Type</th>
+                    <th>SIM region sequence</th>
+                    <th>D/E</th>
+                    <th>S/T</th>
+                    <th>P</th>
+                </tr>
+            </thead>
+            <tbody>
+        {% set current_identifier = [] %}
+        {% set colour = [-1, 1] %}
+
+        {% for row in data %}
+            {% if row["Identifier"] != current_identifier[-1] %}
+                {% set current_identifier = current_identifier.append(row["Identifier"]) %}
+                {% set render_colour = colour[-1] * -1 %}
+                {% set colour = colour.append(render_colour) %}
+            {% else %}
+                {% set render_colour = colour[-1] %}
+            {% endif %}
+
+
+            {% if render_colour == 1 %}
+                <tr>
+                    <td>{{ row['Identifier'] }}</td>
+                    <td>{{ row['Disordered region'] }}</td>
+                    <td>{{ row['Disorder score'] }}</td>
+                    <td>{{ row['Nuclear Score'] }}</td>
+                    <td>{{ row['SIM Position Site'] }}</td>
+                    <td>{{ row['SIM Sequence'] }}</td>
+                    <td>{{ row['SIM Type'] }}</td>
+                    <td>{{ row['SIM region sequence'] }}</td>
+                    <td>{{ row['D/E'] }}</td>
+                    <td>{{ row['S/T'] }}</td>
+                    <td>{{ row['P'] }}</td>
+                </tr>
+            {% else %}
+                <tr class="table-active">
+                <td>{{ row['Identifier'] }}</td>
+                <td>{{ row['Disordered region'] }}</td>
+                <td>{{ row['Disorder score'] }}</td>
+                <td>{{ row['Nuclear Score'] }}</td>
+                <td>{{ row['SIM Position Site'] }}</td>
+                <td>{{ row['SIM Sequence'] }}</td>
+                <td>{{ row['SIM Type'] }}</td>
+                <td>{{ row['SIM region sequence'] }}</td>
+                <td>{{ row['D/E'] }}</td>
+                <td>{{ row['S/T'] }}</td>
+                <td>{{ row['P'] }}</td>
+            </tr>  
+            {% endif %}
+        
+        {% endfor %}
+    </tbody>
+
+{% else %}
+    <div class="container px-4 px-lg-5">
+        <h4>Please upload the data at Upload Files</h4>
+    </div>
+{% endif %}
+
+
+{% endblock %}

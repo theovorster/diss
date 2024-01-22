@@ -1,0 +1,45 @@
+{% include "header.html" %}
+{% from "bootstrap5/form.html" import render_form %} {% block content %}
+
+<div class="container px-4 px-lg-5">
+  <div class="row gx-4 gx-lg-5 justify-content-center">
+    <div class="col-md-10 col-lg-8 col-xl-7">
+
+    <div class="container mt-5">
+      <h1 class="post-title">Upload files</h1>
+
+      <p class="lead">This page uploads the files, and then converts them to a form usable in python. </p>
+
+      <p>Once this is done, you will be redirected to the Process Files page.<br>It could take a few minutes, depending on processing power. You can check the python console to see the status.</p>
+      <p class="text-danger">Please do not leave the page before it is done.</p>
+
+      <p>If you have previously uploaded files, they will be deleted upon uploading new ones.</p>
+    </div>       
+
+
+
+    <div class="container mt-5">
+      <form action="/process_upload" method="post" enctype="multipart/form-data">
+
+        <div class="form-group">
+          <label for="iupredResults" class="form-label mt-4">IUPred Results (.txt or .result)</label>
+          <input class="form-control" type="file" name="iupredResults" id="iupredResults" required>
+        </div>
+
+        <div class="form-group">
+          <label for="nuclearScores" class="form-label mt-4">Nuclear Scores (.csv)</label>
+          <input class="form-control" type="file" name="nuclearScores" id="nuclearScores" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-4">Upload</button>
+
+      </form>
+    </div>
+
+    <br><br>
+    </div>
+  </div>
+</div>
+
+
+{% include "footer.html" %} {% endblock %}

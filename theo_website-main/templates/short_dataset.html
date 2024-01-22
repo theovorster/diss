@@ -1,0 +1,41 @@
+{% include "header.html" %}
+
+{% block content %}
+
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+  
+      <div class="container mt-5">
+
+    <h1>Short dataset</h1> 
+    <p>This is the short dataset, showing only the identifiers which have been found to have potential SIMs, and the number of SIMs found in them.</p>
+
+    <p>To download this data as a csv, either click the button below or find it in "/data/final_results/short_dataset.csv" in the project's working directory.</p>
+    
+
+    <form action="/download_short_csv" method="post">
+        <button type="submit" class="btn btn-lg btn-primary">Download CSV</button>
+    </form>
+
+    <br>
+
+
+<br>
+
+{% if csv_found %}
+    <div class="text-center">
+        {{ data|safe }}
+    </div>
+{% else %}
+        <h4>Please upload the data at Upload Files</h4>
+{% endif %}
+</div>
+</div>
+</div>
+</div>
+
+
+
+{% endblock %}
+

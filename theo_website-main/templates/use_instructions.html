@@ -1,0 +1,46 @@
+{% include "header.html" %}
+
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+            <div class="container mt-5">
+                <h1>How to use</h1>
+                <br>
+
+                <h3>
+                    1. Upload
+                    <small class="text-body-secondary">Both the IUPred .txt / .result and nuclear score .csv files </small>
+                </h3>
+                <p>This takes the .result and .csv files and converts them into a readable state for Python. It could take a few minutes depending on processing power: please do not leave the page while the process is operating.</p>
+                <p>Please do not do edit the files from their raw state.</p>
+                <p>Once this is done, you will be automatically redirected to the Process Files page.</p>
+                <a href="{{ url_for('upload_page') }}">
+                  <div class="d-grid gap-2">
+                        <button class="btn btn-lg btn-primary" type="button">Upload Files</button>
+                  </div>
+                </a>
+
+                <br><br>
+
+
+                <h3>
+                    2. process
+                    <small class="text-body-secondary"> the raw files and enter parameters</small>
+                </h3>
+                <p>This will find the disordered regions, and the potential SIMs inside them. You can define the search parameters in the field on the Proces Files page (i.e. find SIMs in regions at least x long which have a disorder score above y). </p>
+                <p class="text-danger">You must have uploaded the .result and .csv files first.</p>
+
+                <p>Again, this could potentially take a minute or more depending on processing power: please do not leave the page while the process is operating.</p>
+
+                <a href="{{ url_for('process_files') }}">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-lg btn-primary" type="button">Process Files</button>
+                    </div>
+                </a>    
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include "footer.html" %}

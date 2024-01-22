@@ -1,0 +1,203 @@
+{% include "header.html" %}
+
+<!-- Main Content-->
+
+
+<nav class="navbar navbar-expand-lg bg-light" data-bs-theme="light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Contents</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor03">
+      <ul class="navbar-nav me-auto">
+
+
+
+        <li class="nav-item">
+          <a class="nav-link active" href="#abstract">Abstract
+            <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link active" href="#about_sumo">About SUMO
+            <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active" href="#how_to_use">How to Use
+            <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active" href="#parameters">Parameters
+            <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active" href="#whats_next">What's Next?
+            <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active" href="#links">Links
+            <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+
+
+
+    </div>
+  </div>
+</nav>
+
+<div class="container px-4 px-lg-5">
+  <div class="row gx-4 gx-lg-5 justify-content-center">
+    <div class="col-md-10 col-lg-8 col-xl-7">
+
+      <div class="container mt-5">
+
+        <h2 id="abstract">Abstract</h2>
+        <p>Welcome to the website server, a novel bioinformatic tool designed to advance research in the field of post-translational modifications, specifically SUMOylation.</p>
+        <p>This platform is suitable for researchers seeking to identify and analyse potential Small Ubiquitin-like Modifier protein (SUMO) binding proteins within large proteomic datasets.</p>
+        <p>Utilising the advanced bioinformatic tools DeepLoc and IUPred3, the platform locates proteins with SIMs in disordered regions and assesses their likelihood of being functional SUMO interactors based on subcellular localisation.</p>
+        
+
+        <br><hr><hr><br><br>
+
+        <h2 id="about_sumo">About SUMO</h2>
+        <p>SUMOylation is a vital post-translational modification that occurs predominantly within the nucleus, is responsible for multiple cellular functions and has been implicated in various human disorders. It involves the covalent attachment of a SUMO to a target protein, employing a mechanism akin to ubiquitination. In mammals, at least three SUMO isoforms (SUMO1, 2, 3) exist. This modification is not just an on/off switch but a complex regulatory system impacting protein stability, localisation, and interactions. </p>
+        <p>The SUMOylation process begins with SUMO being prepared through proteolytic cleavage, exposing a diglycine motif essential for conjugation. An ATP-dependent activation by the SUMO-activating enzyme SAE1/SAE2 follows this. Subsequently, SUMO is transferred to the conjugating enzyme Ubc9 and then conjugated to a target substrate, often within a consensus sequence ΨKxE (where Ψ is a hydrophobic residue, K is lysine, and x is any amino acid). Alternative motifs and extended consensus sequences have also been identified, broadening the scope of SUMOylation targets.</p>
+        <p>In this programme, the focus is specifically on SUMO Interaction Motifs (SIMs) and SUMO binding proteins. SIMs are sequences within proteins that non-covalently interact with SUMO. Typically comprising a hydrophobic core, these motifs are crucial for recognising and binding SUMOylated substrates. These motifs are predominantly located in structurally disordered regions, offering the necessary conformational flexibility for effective binding. The interaction between SUMO and SIM-bearing proteins is pivotal in transducing the SUMO signal, influencing various downstream cellular responses. </p>
+        <p>Our platform centres on identifying potential novel SUMO-binding proteins. By providing a specialised tool to predict potential interactions within the SUMO system, we aim to facilitate breakthroughs in understanding cellular regulation and contribute to the identification of novel therapeutic targets in diseases linked to SUMOylation dysregulation.</p>
+
+
+        <br><hr><hr><br><br>
+
+        <h2 id="how_to_use">How to use</h2>
+        <br>
+
+        <h3>
+            1. Upload
+            <small class="text-body-secondary">Both the IUPred .txt / .result and nuclear score .csv files </small>
+        </h3>
+        <p>This takes the .result and .csv files and converts them into a readable state for Python. It could take a few minutes depending on processing power: please do not leave the page while the process is operating.</p>
+        <p class="text-danger">Please do not do edit the files from their raw state.</p>
+        <p>Once this is done, you will be automatically redirected to the Process Files page.</p>
+        <a href="{{ url_for('upload_page') }}" class="text-decoration-none">
+          <div class="d-grid gap-2">
+                <button class="btn btn-lg btn-outline-info" type="button"><h4>Upload Files</h4></button>
+          </div>
+        </a>
+
+        <br><br>
+
+
+        <h3>
+            2. process
+            <small class="text-body-secondary"> the raw files and enter parameters</small>
+        </h3>
+        <p>This will find the disordered regions, and the potential SIMs inside them. You can define the search parameters in the form on the Process Files page (i.e. find SIMs in regions at least <em>x</em> long which have a disorder score above <em>y</em> ). There is more information on these parameters in the <a href="#parameters">section below</a>. </p>
+        <p class="text-danger">You must have uploaded the .result and .csv files first.</p>
+
+        <p>Again, this could potentially take a minute or more depending on processing power: please do not leave the page while the process is operating.</p>
+
+        <a href="{{ url_for('process_files') }}" class="text-decoration-none">
+            <div class="d-grid gap-2">
+                <button class="btn btn-lg btn-outline-info" type="button"><h4>Process Files</h4></button>
+            </div>
+        </a>    
+
+        <br><br>
+
+        <h3>3. Viewing Data</h3>
+        <p>After processing is complete, you will be automatically redirected to the <a href="{{ url_for('dataset') }}">Long Dataset</a> page which reports the full information about the disordered regions found with potential SIMs, and the information about those SIMs.</p>
+        <p>You can also view the <a href="{{ url_for('short_dataset') }}">Short Dataset</a> which reports the proteins in which potential SIMs have been found, and how many in each SIM.</p>
+
+
+        <br><hr><hr><br><br>
+
+        <h2 id="parameters">Parameters</h2>
+        <h3>1. Min. Disorder Score <small class="text-body-secondary">(0 - 1)</small></h3>
+        <p>This parameter sets the threshold for the disorder score interpreted by the website. Refer to <a href="#">IUPred3</a> for detailed insights into the methodology behind this numerical representation. The user-inputted score dictates the classification of individual amino acids within the protein sequence as either within or outside disordered regions. For instance, if the value 0.4 is provided, the program exclusively identifies amino acids with disorder scores exceeding 0.4 as constituents of disordered regions.</p>
+        <p class="lead text-info">Default Setting: 0.4.</p>
+        <br>
+
+        <h3>2. Min. Sequence Length <small class="text-body-secondary">(0 - ∞)</small></h3>
+        <p>This parameter determines the minimum length of an amino acid sequence required to be classified as a 'disordered region.' It scans through the protein amino acid sequence, identifying contiguous segments with a length of x or more amino acids that surpass the Minimum Disorder Score threshold specified above. For example, if the value 30 is provided, the program will identify any regions within the protein sequence that consist of 30 or more amino acids, all of which surpass the Minimum Disorder Score.</p>
+        <p class="lead text-info">Default Setting: 30</p>
+        <br>
+
+        <h3>3. Merge Sequences of Closer than X <small class="text-body-secondary">(0 - ∞)</small></h3>
+        <p>This parameter specifies the maximum allowable distance, in amino acids, between two distinct disordered regions for them to be consolidated into a unified disorder region. For instance, with an input of 10, sequences (AA1-AA31) and (AA39-AA100) would be merged. This parameter is instrumental in preventing the inadvertent exclusion of potential SUMO Interaction Motifs (SIMs) due to sequences that may not individually surpass the Disorder Score but collectively reside within a disorder region.</p>
+        <p class="lead text-info">Default Setting: 10</p>
+        <br>
+
+        <h3>4. Min. Nuclear Score <small class="text-body-secondary">(0 - 1)</small></h3>
+        <p>This parameter relates to the nuclear localization score, as determined by <a href="#">DeepLoc</a>, refer to for comprehensive insights into the score calculation. Proteins falling below the specified threshold will be systematically excluded from the dataset. This exclusionary criterion is designed to filter out proteins lacking nuclear localization or those devoid of shuttling behaviour, as SUMO proteins are conventionally associated with nuclear or shuttling attributes. For instance, if 0.4 is designated, all proteins registering scores below this threshold will be omitted from the out file.</p>
+        <p class="lead text-info">Default Setting: 0.4</p>
+        <br>
+
+        <h3>5. Search by IUPred or Anchor Score <small class="text-body-secondary">(IUPred / Anchor)</small></h3>
+        <p>This parameter allows users to choose between the IUPred score and the Anchor score for analysis. Both parameters are available in the IUPred3 out file, and the website mirrors this capability. Refer to <a href="#">IUPred3</a> for in-depth details on the distinct scores.</p>
+
+        <br><hr><hr><br><br>
+
+        <h2 id="whats_next">What's Next?</h2>
+        <h3>Refinement</h3>
+        <p>The output produced by the website may need some refinement.</p>
+        <br>
+
+        <h3>Overlapping</h3>
+        <p>Due to the early nature of the website, there are issues with SIMs overlapping. For example, you might find overlaps such as (AA31-AA34) and (AA32-AA35). To address this, download the CSV file and review SIM candidates that have experienced overlapping. Decide on an approach for handling these overlaps, such as always keeping the first occurring SIM in the sequence and removing the overlapping one. </p>
+        <br>
+
+        <h3>Further Refinement</h3>
+        <p>Upon examining the candidate SIMs, you might conclude that some are unlikely to be true SIMs, perhaps due to the absence of acidic amino acids (D/E), phosphorylatable amino acids (S/T), or P amino acid. The decision to exclude these candidates should be based on your research objectives and the level of rigor required for your analysis.</p>
+        <br>
+
+        <h3>Next Steps</h3>
+        <h4><small class="text-body-secondary">Literature Search</small></h4>
+        <p>Locate proteins within the dataset that seem interesting and are candidates for further validation. Utilize search engines, <a href="#">PubMed</a>, and/or <a href="#">UNIPROT</a> with queries like “x SUMO”, “x SUMOylation”, “x SUMO Interaction Motifs (SIMs)”, and “x SUMO binding proteins”, where 'x' is your protein of interest. This approach is to determine whether the protein's function correlates with known SUMO binding proteins. It also allows for the assessment of existing research regarding the protein’s potential involvement in the SUMO system.</p>
+        <br>
+
+        <h4><small class="text-body-secondary">Cross Validation with Other Programs</small></h4>
+        <p>Validate your candidate SIM sites using other SIM-locating programs like <a href="#">Jassa.fr</a> and <a href="#">GPS-SUMO</a>. High scores from these programs can reinforce the credibility of your identified SIMs.</p>
+        <br>
+
+
+        <h4><small class="text-body-secondary">Ortholog Conservation Analysis</small></h4>
+        <p>Use <a href="#">Jalview</a> to assess the ortholog conservation of candidate SIM sites. Conserved sites across species suggest functional importance, indicating potential SUMO binding capability.</p>
+        <br>
+
+        <h4><small class="text-body-secondary">Structural Analysis</small></h4>
+        <p>Employ tools like <a href="#">AlphaFold</a> and <a href="#">Pymol</a> to model the interaction between your protein and SUMO. This can help predict if the protein can potentially bind to SUMO. Well-aligned structures with potential binding sites are indicative of SUMO binding properties.</p>
+        <p>Remember, these steps are only guides. If one step yields inconclusive results, it's still worth pursuing other verification methods, as the proteins might still be of interest. Explore other verification techniques as well.</p>
+        <br>
+
+        <h4><small class="text-body-secondary">Ortholog Conservation Analysis</small></h4>
+        <p>The final confirmation of whether proteins are true SUMO binding proteins involves in vivo experimentation. Consider performing co-immunoprecipitation assays or pull-down assays. This experimental approach remains the most definitive method for validating SUMO binding proteins. </p>
+
+        <br><hr><hr><br><br>
+
+        <h2 id="links">Links</h2>
+        <p><a href="#">Codebase</a></p>
+        <p><a href="#">Testing Datasets</a></p>
+        <p><a href="#">Methodology</a></p>
+        <p><a href="#">Research Paper</a></p>
+        <p><a href="#">References</a></p>
+
+        <br><br>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include "footer.html" %}

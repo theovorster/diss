@@ -1,0 +1,33 @@
+{% include "header.html" %}
+{% from "bootstrap5/form.html" import render_form %} {% block content %}
+
+<div class="container px-4 px-lg-5">
+  <div class="row gx-4 gx-lg-5 justify-content-center">
+    <div class="col-md-10 col-lg-8 col-xl-7">
+
+    <div class="container mt-5">
+      <h1 class="post-title">Process files</h1>
+
+      <p class="lead">This page finds disordered sequences, using the parameters described below. </p>
+
+      <p>Once this is done, you will be redirected to the page for the long dataset. It could take a few minutes, depending on processing power. A 2020 Macbook Air M1 takes 2-3 minutes. You can check the python console to see the status.</p>
+      <p class="text-danger">Please do not leave the page before it is done.</p>
+
+      <p>If you have already processed the uploaded files, doing so again will overwrite your previous parameters.</p>
+    </div>       
+
+
+    <div class="container mt-5">
+        <h4>Input Fields Example</h4>
+        
+        <!-- Input fields and form -->
+        {{ render_form(form) }}
+      </div>
+
+    <br><br>
+    </div>
+  </div>
+</div>
+
+
+{% include "footer.html" %} {% endblock %}
